@@ -143,5 +143,9 @@ Inspect (CLI)
 
 
 ## 3. Dagster Lineage and Job (UI)
+
+1. Lineage
 ![alt text](Lineage.png)
+
+2. Job
 ![alt text](Job_dagster.png)
