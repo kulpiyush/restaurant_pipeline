@@ -63,7 +63,7 @@ The project is configured for scheduled ingestion to run automatically, fulfilli
 ### 3.2. Code Structure and Key Files
 
 The directory structure follows Dagster's recommended project layout, separating application code from tests and data artifacts.
-
+```text
 .
 ├── data
 │   ├── analytics.duckdb
@@ -108,6 +108,8 @@ The directory structure follows Dagster's recommended project layout, separating
 └── setup.py
 
 10 directories, 32 files
+
+```
 
 
 ### 3.3. Verification of Results
