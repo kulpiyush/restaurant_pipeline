@@ -20,6 +20,8 @@ This project delivers a robust, automated **Extract, Load, Transform (ELT)** dat
 
 ## 2. Layered Data Pipeline Flow
 
+![alt text](data_folder.png)
+
 ### 2.1. Bronze Layer: Raw Ingestion (CSV)
 
 This layer is the persistent landing zone for raw, untouched source data.
@@ -27,6 +29,8 @@ This layer is the persistent landing zone for raw, untouched source data.
 * **Ingestion:** Data is extracted from 6 local CSV files (customer, order, product details) and the remote JSONL stream (support tickets).
 * **Transformation:** Files are loaded into persistent raw CSV files in the `data/bronze` directory.
 * **Key Scripts:** All ingestion logic is contained within functions like `create_raw_csv_asset` and `raw_support_tickets_bronze` in `assets.py`.
+
+![alt text](bronze.png)
 
 ### 2.2. Silver Layer: Cleaned Fact Table (Parquet)
 
@@ -37,6 +41,8 @@ This layer cleans, normalizes, and joins the core business entities. The heavy l
 * **Data Quality:** Column renaming (`customer` to `customer_id`) and a crucial new flag (`has_support_ticket`) are added here.
 * **Output:** The final, cleaned `fct_orders_tickets.parquet` is created in `data/silver`.
 
+![alt text](silver.png)
+
 ### 2.3. Gold Layer: Business Marts (Parquet)
 
 This final layer delivers actionable, aggregated metrics directly consumable by reporting tools.
@@ -45,6 +51,8 @@ This final layer delivers actionable, aggregated metrics directly consumable by 
     1.  **Average Order Value (AOV)**
     2.  **Number of Tickets for Each Order**
 * **Processing:** Two separate Gold assets execute optimized SQL aggregation queries against the Silver layer data within DuckDB and export the final reports to Parquet files in `data/gold`.
+
+![alt text](gold.png)
 
 ---
 
@@ -57,6 +65,19 @@ The project is configured for scheduled ingestion to run automatically, fulfilli
 * **File:** `restaurant_pipeline/definitions.py`
 * **Configuration:** A `ScheduleDefinition` is set with a Cron expression to trigger the entire ELT job daily.
 * **Current Schedule:** The pipeline is scheduled to run daily at **01:00 AM CET** (or the time requested for immediate demonstration).
+
+Schedule Started (Dagster UI)
+![alt text](schedul_started.png)
+
+Schedule Started (CLI)
+![alt text](schedule_CLI.png)
+
+Materializing Schedule (Dagster UI)
+![alt text](Materializing_schedule.png)
+
+Schedule Started (Dagster UI)
+![alt text](schedule_sucess.png)
+
 
 
 
