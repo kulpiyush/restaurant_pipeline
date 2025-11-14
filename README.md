@@ -140,3 +140,9 @@ The `inspect_data.py` script serves as the proof-of-value, reading the final Par
 Inspect (CLI)
 ![alt text](inspect_ouput.png)
 ![alt text](inspect1_output.png)
+
+
+## 3. Dagster Lineage and Job (UI)
+
+![alt text](../../Ss_Final_project/Global_Asset_Lineage.svg)
+![alt text](Job_dagster.png)
