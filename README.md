@@ -65,45 +65,40 @@ The project is configured for scheduled ingestion to run automatically, fulfilli
 The directory structure follows Dagster's recommended project layout, separating application code from tests and data artifacts.
 ```text
 .
-├── data
-│   ├── analytics.duckdb
-│   ├── bronze
-│   │   ├── customers.csv
-│   │   ├── items.csv
-│   │   ├── orders.csv
-│   │   ├── products.csv
-│   │   ├── stores.csv
-│   │   ├── supplies.csv
-│   │   └── support_tickets.csv
-│   ├── gold
-│   │   ├── aov_mart.parquet
-│   │   └── order_ticket_count_mart.parquet
-│   └── silver
-│       └── fct_orders_tickets.parquet
-├── inspect_data.py
+├── data                              # Data Lake Storage (Medallion Layers)
+│   ├── analytics.duckdb                # DuckDB file: Used as the transformation engine
+│   ├── bronze                          # Layer 1: Raw, Unprocessed Data (CSV)
+│   │   ├── customers.csv                 # Raw data from local files
+│   │   ├── items.csv                     # Raw data from local files
+│   │   ├── orders.csv                    # Raw data from local files
+│   │   ├── products.csv                  # Raw data from local files
+│   │   ├── stores.csv                    # Raw data from local files
+│   │   ├── supplies.csv                  # Raw data from local files
+│   │   └── support_tickets.csv           # Raw data ingested from Azure Blob Storage
+│   ├── gold                            # Layer 3: Final Analytical Marts (Parquet)
+│   │   ├── aov_mart.parquet              # Gold Mart: Calculated Average Order Value
+│   │   └── order_ticket_count_mart.parquet # Gold Mart: Calculated Tickets Per Order
+│   └── silver                          # Layer 2: Cleaned, Joined Fact Data (Parquet)
+│       └── fct_orders_tickets.parquet  # Silver Fact Table: Cleaned Orders joined with Tickets
+├── inspect_data.py                   # Verification Script: Connects to DuckDB/reads Parquet for QA
 ├── pyproject.toml
-├── raw_data
-│   ├── raw_customers.csv
-│   ├── raw_items.csv
-│   ├── raw_orders.csv
-│   ├── raw_products.csv
-│   ├── raw_stores.csv
-│   └── raw_supplies.csv
-├── README.md
-├── restaurant_pipeline
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-312.pyc
-│   │   ├── assets.cpython-312.pyc
-│   │   └── definitions.cpython-312.pyc
-│   ├── assets.py
-│   └── definitions.py
-├── restaurant_pipeline_tests
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-312.pyc
-│   │   └── test_assets.cpython-312-pytest-7.4.4.pyc
-│   └── test_assets.py
+├── raw_data                          # Source Data: Local files (ignored in data/bronze)
+│   ├── raw_customers.csv
+│   ├── raw_items.csv
+│   ├── raw_orders.csv
+│   ├── raw_products.csv
+│   ├── raw_stores.csv
+│   └── raw_supplies.csv
+├── README.md                         # Project Documentation (The submission file)
+├── restaurant_pipeline               # Dagster Code Modules (Application Logic)
+│   ├── __init__.py                     # Python package initialization
+│   ├── __pycache__
+│   ├── assets.py                       # CORE ELT LOGIC: All Bronze, Silver, Gold asset definitions
+│   └── definitions.py                  # DAGSTER CONFIG: Loads assets, defines Schedules/Jobs
+├── restaurant_pipeline_tests         # Testing Module
+│   ├── __init__.py
+│   ├── __pycache__
+│   └── test_assets.py                  # Unit and Integration Tests for B/S/G layers
 ├── setup.cfg
 └── setup.py
 
