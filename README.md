@@ -149,3 +149,24 @@ Inspect (CLI)
 
 2. Job
 ![alt text](Job_dagster.png)
+
+
+## 🚨 Final Note on Data Populating
+
+Please note that due to **GitHub's 100 MB file size limit** and the challenges faced with Git history, the output folders below have been **intentionally kept empty** in this final submission repository:
+
+* `data/analytics.duckdb`
+* `data/bronze/`
+* `data/silver/`
+* `data/gold/`
+
+**To fully populate the data directories and verify the end-to-end pipeline:**
+
+1.  **Ensure Dependencies:** Make sure all dependencies are installed in your environment.
+2.  **Run Dagster:** Execute the Dagster environment from your project root:
+    ```bash
+    dagster dev
+    ```
+3.  **Materialize Assets:** In the Dagster UI, navigate to the **Asset Catalog** and click **Materialize All**.
+
+This action will successfully run the entire **Bronze $\to$ Silver $\to$ Gold** pipeline, downloading the necessary data (including from Azure) and generating all required **CSV** and **Parquet** files in the respective `data` directories.
