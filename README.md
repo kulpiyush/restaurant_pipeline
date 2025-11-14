@@ -136,3 +136,7 @@ The `inspect_data.py` script serves as the proof-of-value, reading the final Par
 | **Silver Fact Table** | Data types, row count (400,423), column renaming (`customer_id`). | **SUCCESS** |
 | **AOV Mart (Gold)** | Single row containing the average `order_total`. | **SUCCESS** (e.g., Value: 1045.77) |
 | **Ticket Mart (Gold)** | Count of tickets per unique order ID ($\ge 1$). | **SUCCESS** (e.g., Total orders with tickets: 63,043) |
+
+Inspect (CLI)
+![alt text](inspect_ouput.png)
+![alt text](inspect1_output.png)
