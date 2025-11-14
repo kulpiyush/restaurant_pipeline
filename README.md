@@ -143,6 +143,5 @@ Inspect (CLI)
 
 
 ## 3. Dagster Lineage and Job (UI)
-
-![alt text](../../Ss_Final_project/Global_Asset_Lineage.svg)
+![alt text](Lineage.png)
 ![alt text](Job_dagster.png)
