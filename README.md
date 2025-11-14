@@ -105,8 +105,6 @@ The directory structure follows Dagster's recommended project layout, separating
 10 directories, 32 files
 
 ```
-![alt text](<Screenshot 2025-06-24 at 11.37.12.png>)
-
 
 ### 3.3. Verification of Results
 
